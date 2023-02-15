@@ -6,7 +6,7 @@ function App() {
   // const [key, setkey] = useState(1);
   const current = new Date();
 
-  let date1 = `${current.getDate()}/${current.getMonth()}/${current.getFullYear()}`
+  let date1 = `${current.getDate()}/${current.getMonth()}/${current.getFullYear()} || ${current.getHours()}:${current.getMinutes()}`
   // console.log(current)
   const [inputdata, setInputdata] = useState({ id: current.getTime(), title: "", body: "", date: date1 });
   const { id, title, body, date } = inputdata;
@@ -43,7 +43,7 @@ function App() {
   const handleAdd = async () => {
     await fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
-      body: JSON.stringify({ id, title, body, date: date1 }),
+      body: JSON.stringify({ id, title, body, date:date1 }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -175,6 +175,15 @@ function App() {
       title: 'Description',
       dataIndex: 'body',
       key: 'body',
+    },
+    {
+      title: 'Time',
+      dataIndex: 'date',
+      key: 'time',
+      width:"10%",
+      render:(_,time)=>(
+        <p>{time.date}</p>
+      )
     },
     {
       title: 'Status',
